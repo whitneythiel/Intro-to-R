@@ -6,7 +6,7 @@
 #to figure out what type of regression is best for your data
 
 #set working directory
-setwd("~/Mitchell Lab Stuff/Data")
+setwd("~/path/Data")
 
 #load data set
 mydata <- read.csv("RS5_data.csv")
