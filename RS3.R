@@ -1,6 +1,6 @@
-setwd("~/Mitchell Lab Stuff/Data")
+setwd("~/path/Data")
 
-raw <- read.csv("Ashley_data_R.csv")
+raw <- read.csv("RS3_data.csv")
 
 library("dplyr")
 
