@@ -1,5 +1,5 @@
 #set working directory
-setwd("~/Mitchell Lab Stuff/Data")
+setwd("~/path/Data")
 
 #import dataset and make it an object
 count1 <- read.csv("RS4_count_data1.csv")
