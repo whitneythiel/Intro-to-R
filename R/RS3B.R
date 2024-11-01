@@ -1,6 +1,6 @@
-setwd("~/Mitchell Lab Stuff/Data")
+setwd("~/path/Data")
 
-raw.data <-read.csv("Ashley_data_R.csv")
+raw.data <-read.csv("RS3_data.csv")
 
 head(raw.data)
 
