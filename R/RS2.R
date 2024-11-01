@@ -15,7 +15,7 @@ library(ggplot2)
 
 #First, set your working directory & load your dataset
 
-setwd("~/Mitchell Lab Stuff/Data")
+setwd("~/path/Data")
 
 read.csv("RS2_sample_data1.csv",  
                        fileEncoding="UTF-8-BOM")
@@ -76,39 +76,39 @@ slope <- summary(Primer.lm)$coeff[2]
 # Now we'll work with a new dataset to generate some other types of plots
 
 #Import the second dataset. 
-havcr1_data <-read.csv("RS2_sample_data2.csv")
+gene_data <-read.csv("RS2_sample_data2.csv")
 
-head(havcr1_data)
+head(gene_data)
 
 #For the first couple plots we'll work with the variable Number_MiG
 #First we'll visualize the distruction of the data using a histogram
-ggplot(havcr1_data, aes(x=Number_MiG)) + 
+ggplot(gene_data, aes(x=Number_MiG)) + 
   geom_histogram(na.rm = TRUE)
 
 #We can change the binwidth to get a more informative plot
-ggplot(havcr1_data, aes(x=Number_MiG)) + 
+ggplot(gene_data, aes(x=Number_MiG)) + 
   geom_histogram(na.rm = TRUE, binwidth = 5)
 
 #We can make this plot more visually appealing by:
 #Adding some color to the bars and changing the theme 
 
-ggplot(havcr1_data, aes(x=Number_MiG)) + 
+ggplot(gene_data, aes(x=Number_MiG)) + 
   geom_histogram(na.rm = TRUE, binwidth = 5, color="black", fill="#1b9e77")+
   theme_classic()
 
 #We can use violin plots to visualize distribution by genotype
-ggplot(havcr1_data, aes(x=genotype, y=Number_MiG))+
+ggplot(gene_data, aes(x=genotype, y=Number_MiG))+
   geom_violin(trim = TRUE, na.rm = TRUE)
 
 #Add a point for the mean
-ggplot(havcr1_data, aes(x=genotype, y=Number_MiG))+
+ggplot(gene_data, aes(x=genotype, y=Number_MiG))+
   geom_violin(trim = FALSE, na.rm = TRUE)+ 
   stat_summary(fun=mean, shape=5, color="green", size=2)
 
 
 #We can also make our baseplots an object (p) 
 
-p<-ggplot(havcr1_data, aes(x=genotype, y=Number_MiG, color=genotype))+
+p<-ggplot(gene_data, aes(x=genotype, y=Number_MiG, color=genotype))+
   geom_violin(trim = FALSE, na.rm = TRUE)
 
 #And then try adding different color palettes
@@ -120,38 +120,38 @@ p+ scale_color_grey()+ theme_classic()
 
 #Now let's work with a different variable to create a boxplot
 #For this plot we'll work with Phagocytic Load
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)
 
 #reorder genotype levels for plots
 
-havcr1_data$genotype <- factor(havcr1_data$genotype , levels=c("wt", "het", "mut"))
+gene_data$genotype <- factor(gene_data$genotype , levels=c("wt", "het", "mut"))
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)
 
 #Now let's make it pretty
 
 #add a theme
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_minimal()
 
 #adjust the y axis
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))
 
 # we can also add more breaks to the y axis if we want
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3), breaks = c(0, 0.5,1,1.5,2,2.5,3))
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3), breaks = seq(0,3,0.5))
@@ -160,19 +160,19 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
 
 y.breaks <-c(0, 0.5,1,1.5,2,2.5,3)
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3), breaks = y.breaks)
 
 #If we want, we could remove the outlier points
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE, outlier.shape = NA)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))
 
 #Change axis labels & add title
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -180,7 +180,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
 
 #Change the color of the boxes by groups. Example, genotype
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -191,7 +191,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
 
 #move it to the top & rename it
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -201,7 +201,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
 
 #remove the legend
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -211,7 +211,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load, color=genotype)) +
 #We can add points to our plots with geom_dotplot or geom_jitter
 #going back to the black and white version for this
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -222,7 +222,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
 #Let's change the color to embryo number- looks weird- continuous color
 
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -230,13 +230,13 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
   geom_jitter(position = position_jitter(0.1), na.rm = TRUE,
               aes(color= embryo))
 
-str(havcr1_data)
+str(gene_data)
 
 #Embryo is set as an integer, not a factor we need to change this
-havcr1_data$embryo <-as.factor(havcr1_data$embryo)
+gene_data$embryo <-as.factor(gene_data$embryo)
 
 #try the plot again- looks great! Separate colors for each embryo
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -246,9 +246,9 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
 
 # now let's also change the shape of the points to batch number
 
-havcr1_data$batch <-as.factor(havcr1_data$batch)
+gene_data$batch <-as.factor(gene_data$batch)
 
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -267,7 +267,7 @@ ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
 # and I am changing the text size
 
 tiff("Final_Plot 2.tiff", width = 2.5, height = 2, units = "in", dpi=300)
-ggplot(havcr1_data, aes(x=genotype, y=phagocytic_load)) +
+ggplot(gene_data, aes(x=genotype, y=phagocytic_load)) +
   geom_boxplot(na.rm = TRUE, outlier.shape = NA)+
   theme_classic()+
   scale_y_continuous(limits = c(0,3))+
@@ -291,9 +291,9 @@ library(car)
 #First, check assumptions for ANOVA
 
 ## 1. Check homogeneity of variances using Levene's Test
-leveneTest(phagocytic_load ~ genotype, data = havcr1_data)
+leveneTest(phagocytic_load ~ genotype, data = gene_data)
 ## 2. Check for normality using Shapiro-Wilk Test
-res.aov <- aov(phagocytic_load ~ genotype, data = havcr1_data)
+res.aov <- aov(phagocytic_load ~ genotype, data = gene_data)
 aov_residuals <- residuals(object = res.aov)
 shapiro.test(x = aov_residuals )
 
@@ -302,7 +302,7 @@ plot(res.aov, 2)
 
 #normality is violated so we can use a non-parametric test
 
-kruskal.test(phagocytic_load ~ genotype, data = havcr1_data)
+kruskal.test(phagocytic_load ~ genotype, data = gene_data)
 
 
 
